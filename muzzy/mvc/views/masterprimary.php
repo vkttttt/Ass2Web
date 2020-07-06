@@ -124,10 +124,6 @@
     require_once "./mvc/views/pages/" . $data['Controller'] . ".php";
   } elseif ($data['Controller'] == "Shop") {
     require_once "./mvc/views/pages/" . $data['Action'] . ".php";
-  } elseif ($data['Controller'] == "Course") {
-    require_once "./mvc/views/pages/" . $data['Action'] . ".php";
-  } elseif ($data['Controller'] == "Instructor") {
-    require_once "./mvc/views/pages/" . $data['Action'] . ".php";
   } elseif ($data['Controller'] == "Search") {
     require_once "./mvc/views/pages/" . $data['Action'] . ".php";
   } elseif ($data['Controller'] == "User") {
@@ -165,7 +161,7 @@
         </div>
         <div class="col-12">
           <hr class="light-100">
-          <h5>&copy; Bản quyền thuộc về nhóm 14</h5>
+          <h5>&copy; Copyright by TNT team</h5>
         </div>
       </div>
     </div>

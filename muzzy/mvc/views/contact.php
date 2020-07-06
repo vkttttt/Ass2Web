@@ -153,7 +153,7 @@
         </div>
         <div class="col-12">
           <hr class="light-100">
-          <h5>&copy; Bản quyền thuộc về nhóm 14</h5>
+          <h5>&copy; Copyright by TNT team</h5>
         </div>
       </div>
     </div>
