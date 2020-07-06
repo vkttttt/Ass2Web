@@ -3,18 +3,13 @@
 class Admin extends Controller {
 
     private $base_url;
-    private $courseModel;
-    private $userModel;
-    private $joinCourseModel;
     private $CommentModel;
     private $ShopModel;
     private $currentIdUser;
 
     function __construct() {
         $this->action = "Default";
-        $this->courseModel = $this->model('CourseModel');
         $this->userModel = $this->model('UserModel');
-        $this->joinCourseModel = $this->model('JoinCourseModel');
         $this->CommentModel = $this->model('CommentModel');
         $this->ShopModel = $this->model('ShopModel');
         $this->FeedBackModel = $this->model('FeedBackModel');
@@ -256,83 +251,10 @@ class Admin extends Controller {
         }
     }
 
-    function refCourseDelete() {
-        $idUser = $this->userModel->isLogged();
-        if (isset($_POST['id']) && $idUser !== false) {
-            $idCourse = $_POST['id'];
-            $data = [
-                'deleteCourse' => $this->courseModel->Update($idCourse, [
-                    'status' => 0
-                ])
-            ];
-            $this->view("admin/ref/ajax/course_delete", $data);
-        }
-    }
 
-    function refCourseEditForm() {
-        $idUser = $this->userModel->isLogged();
-        if (isset($_POST['id']) && $idUser !== false) {
-            $idCourse = $_POST['id'];
-            $detailCourse = $this->courseModel->GetDetailCourse($idCourse);
-            if (!empty($detailCourse)) {
-                $detailCourse = mysqli_fetch_array($detailCourse);
-                if ($detailCourse['idinstructor'] == $idUser) {
-                    $data = [
-                        'deleteCourse' => $detailCourse
-                    ];
-                    $this->view("admin/ref/ajax/course_editForm", $data);
-                }
-            }
-        }
-    }
 
-    function refCourseUpdate() {
-        $idUser = $this->userModel->isLogged();
-        if (isset($_POST['id']) && $idUser !== false) {
-            $idCourse = $_POST['id'];
-            $detailCourse = $this->courseModel->GetDetailCourse($idCourse);
-            if (!empty($detailCourse)) {
-                $detailCourse = mysqli_fetch_array($detailCourse);
-                if ($detailCourse['idinstructor'] == $idUser) {
-                    $data_update = [
-                        'content' => "'" . $_POST['content'] . "'",
-                        'timestart' => "'" . $_POST['start'] . "'",
-                        'timeend' => "'" . $_POST['end'] . "'",
-                        'fee' => str_replace(",", ".", $_POST['fee']),
-                        'address' => "'" . $_POST['address'] . "'",
-                        'description' => "'" . $_POST['description'] . "'",
-                    ];
-                    $updateStatus = $this->courseModel->update($idCourse, $data_update);
-                    $data = [
-                    ];
-                    $this->view("admin/ref/ajax/course_update", $data);
-                }
-            }
-        }
-    }
 
-    function refCourseAdd() {
-        $idUser = $this->userModel->isLogged();
-        if ($idUser !== false) {
-            $data_add = [
-                'idinstructor' => $idUser,
-                'content' => "'" . $_POST['content'] . "'",
-                'timestart' => "'" . $_POST['start'] . "'",
-                'timeend' => "'" . $_POST['end'] . "'",
-                'fee' => str_replace(",", ".", $_POST['fee']),
-                'address' => "'" . $_POST['address'] . "'",
-                'description' => "'" . $_POST['description'] . "'",
-                'rate' => 0,
-                'status' => 1
-            ];
-            $addStatus = $this->courseModel->insert($data_add);
-            $data = [
-                'added' => $_POST['content']
-            ];
-            $this->view("admin/ref/ajax/course_add", $data);
-        }
-    }
-
+    
     function refStudentLoadlist() {
         $idUser = $this->userModel->isLogged();
         if ($idUser !== false) {
@@ -343,19 +265,7 @@ class Admin extends Controller {
         }
     }
 
-    function refStudentOfCourseDelete() {
-        $idUser = $this->userModel->isLogged();
-        if (isset($_POST['id'])) {
-            $idJoinCourse = $_POST['id'];
-            $data = [
-                'deleteStudent' => $this->joinCourseModel->Update($idJoinCourse, [
-                    'status' => 0
-                ])
-            ];
-            $this->view("admin/ref/ajax/student_delete", $data);
-        }
-    }
-
+    
     function refCommentLoadlist() {
         $idUser = $this->userModel->isLogged();
         if ($idUser !== false) {

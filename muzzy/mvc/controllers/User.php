@@ -61,7 +61,6 @@ class User extends Controller
             "Action" => "UpdateInfor",
             "Infor" => $this->UserModel->GetUserById($_SESSION['idUser']),
             "ReserveShop" => $this->UserModel->GetReserveShopById($_SESSION['idUser']),
-            "ReserveCourse" => $this->UserModel->GetReserveCourseById($_SESSION['idUser']),
         ];
         $this->view("masterprimary", $data);
     }

@@ -77,27 +77,7 @@ class UserModel extends Db {
         return $listShop;
     }
 
-    function GetReserveCourseById($id) {
-
-        $query = "SELECT * FROM reserve WHERE userID = '$id' AND type='course'";
-
-        $result = $this->ExecuteQuery($query);
-
-        $listShop = [];
-
-        while ($row = mysqli_fetch_array($result)) {
-
-            $queryName = "SELECT content , address FROM course WHERE id = $row[roomID]";
-
-            $NameResulte = mysqli_fetch_array($this->ExecuteQuery($queryName));
-
-            $merge = array_merge($row, $NameResulte);
-
-            array_push($listShop, $merge);
-        }
-
-        return $listShop;
-    }
+   
 
     function UpdateInfor($id, $fullName, $address, $phoneNumber, $imgurl) {
         $target_dir = "./public/image/";
